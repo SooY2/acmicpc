@@ -1,0 +1,16 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+bool solution(int x) {
+    bool answer = false;
+    int hap=0;
+    int n=x;
+    while(n>0){
+        hap+=n%10;
+        n=n/10;
+    }
+    if(x%hap==0) answer = true;
+    return answer;
+}
