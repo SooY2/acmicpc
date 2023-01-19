@@ -1,0 +1,46 @@
+/* 1158요세푸스
+
+입력받은거 큐에 순서대로 넣기
+
+while큐에 사람이 아무도 없을때까지
+k번째 전까지 pop해서 저장하고 큐의 맨뒤에 넣기
+k번째사람 pop해서 삭제,
+
+
+
+*/
+
+#include <iostream>
+#include <deque>
+#include <vector>
+using namespace std;
+
+int main(){
+    int N,K;
+    cin>>N>>K; //총 N명의 사람, k번째사람 제거
+    deque<int> q;
+    vector<int> v;
+
+    for(int i=1;i<=N;i++){
+        q.push_back(i);
+    }
+
+    while(!q.empty()){
+        for(int i=1;i<K;i++){
+            int temp=q.front();
+            q.pop_front();
+            q.push_back(temp);
+        }
+        v.push_back(q.front());
+        q.pop_front();
+
+    }
+
+    cout<<'<';
+    for(int i=0;i<v.size()-1;i++){
+        cout<<v[i]<<", ";
+    }
+
+    cout<<v[v.size()-1]<<'>';
+    return 0;
+}
