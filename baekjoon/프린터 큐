@@ -1,0 +1,57 @@
+/* 프린터 큐
+
+큐의 가장 앞 문서의 중요도 확인
+나머지 문서들 중 중요도가 더 높은문서가 하나라도 있으면 인쇄하지 않고 큐의 맨뒤로 이동, 아니면 인쇄
+
+문서의 인덱스와 동일한 벡터 만들어서 각 인덱스에 중요도 넣어주기
+만약 중요도[q.front]의 값이 가장 크면 cnt++ 해주고 팝, 그 자리 중요도는 0으로 바꿔주기 
+*/
+
+#include <iostream>
+#include <deque>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main(){
+    int C;//테스트케이스 수
+    
+    cin>>C;
+    while(C--){
+        int n,m;//문서의 개수, 몇번째로 인쇄될지 궁금한 문서의 인덱스(큐의 몇번째에 있는지 0부터)
+        int cnt=0;
+        cin>>n>>m;
+
+        deque<int> q;
+        vector<int> v;
+        q.clear();
+        v.clear();
+
+        for(int i=0;i<n;i++){
+            int impt;
+            cin>>impt;
+            q.push_back(i);//인덱스 
+            v.push_back(impt);//각 인덱스에 맞는 중요도(q의 현재 위치의 인덱스)
+        }//중요도 순서대로 입력받기
+
+        
+        int ans=-1;//pop한 문서의 인덱스
+        while(ans!=m){
+            if(v[q.front()]==*max_element(v.begin(),v.end())){//맨 앞의 문서의 중요도가 가장 크면
+                ans=q.front();
+                v[ans]=0;
+                q.pop_front();
+                cnt++;
+
+            }else{
+                q.push_back(q.front());
+                q.pop_front();
+            }
+            
+        }
+        cout<<cnt<<'\n';
+
+    }
+
+    return 0;
+}
