@@ -1,0 +1,24 @@
+//2563 색종이
+#include <iostream>
+#include<algorithm>
+using namespace std;
+
+int main(){
+
+    int bg[100][100]={0}; //false로 초기화
+    int n;
+
+    cin>>n;
+    while(n--){
+        int x,y;
+        cin>>x>>y;
+        for(int i=x;i<x+10;i++){
+            for(int j=y;j<y+10;j++){
+                bg[i][j]=1;
+            }
+        }
+    }
+    cout<<count(&bg[0][0],&bg[0][0]+10000,1);
+    
+    return 0;
+}
