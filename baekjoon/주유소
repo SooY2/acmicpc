@@ -1,0 +1,42 @@
+//13305 주유소
+#include <iostream>
+using namespace std;
+
+int n;
+long long len[100000];
+long long city[100000];
+long long oil,price;
+
+void input(){
+    cin>>n;
+    for(int i=0;i<n-1;i++){
+        cin>>len[i];
+    }
+    for(int i=0;i<n;i++){
+        cin>>city[i];
+    }//입력받기
+
+    return;
+}
+
+
+int main(){
+    input();
+
+    int idx=0;
+    int next_idx=0;
+    while(next_idx<n-1){
+        next_idx=idx+1;
+        while (city[idx]<city[next_idx]&&next_idx!=n-1){ //또 그 다음 도시 검사해서 더 싼 도시가 나올 때까지
+            price+=len[next_idx-1]*city[idx];
+            next_idx++;
+        }
+        price+=len[next_idx-1]*city[idx];
+        idx=next_idx;
+
+    }
+
+    cout<<price;
+
+    return 0;    
+}
