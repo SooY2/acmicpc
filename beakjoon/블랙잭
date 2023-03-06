@@ -9,7 +9,7 @@ int main(){
     cin>>N>>M;
     vector<int> card;
 
-    for(int i=0;i<N;i++){//¼ýÀÚ N°³¸¸Å­ ³Ö±â
+    for(int i=0;i<N;i++){//Â¼Ã½Ã€Ãš NÂ°Â³Â¸Â¸Ã…Â­ Â³Ã–Â±Ã¢
         cin>>num;
         card.push_back(num);
     }
