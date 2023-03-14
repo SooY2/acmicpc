@@ -1,0 +1,68 @@
+/*
+2751 수 정렬하기2
+퀵정렬로 풀어보기
+
+퀵정렬은 시간복잡도가 최대 n^2일 수 있어서 시간초과남 다른 정렬법함찾아야함
+*/
+
+#include <iostream>
+using namespace std;
+
+int n;
+int arr[1000005];
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
+	return;
+}
+
+void show() {
+	for (int i = 0; i < n; i++) {
+		cout << arr[i] << "\n";
+	}
+	return;
+}
+
+void quick(int* arr, int start, int end) {
+	if (start >= end) return;
+
+	int key =start;
+	int up = start + 1, down = end, temp;
+
+	while (up <= down) {//엇갈릴때까지 반복
+		while (up <= end && arr[up] <= arr[key]) {
+			up++;
+		}
+		while (down > start && arr[down] >= arr[key]) {
+			down--;
+		}
+		if (up >= down) {
+			temp = arr[down];
+			arr[down] = arr[key];
+			arr[key] = temp;
+		}
+		else {
+			temp = arr[up];
+			arr[up] = arr[down];
+			arr[down] = temp;
+		}
+	}
+
+	quick(arr, down + 1, end);
+	quick(arr, start, down - 1);
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	quick(arr, 0, n - 1);
+	show();
+
+	return 0;
+}
