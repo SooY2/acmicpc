@@ -1,4 +1,4 @@
-/*10989 수 정렬하기3*/
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
