@@ -1,0 +1,76 @@
+//병합정렬 mergesort
+
+#include <iostream>
+using namespace std;
+
+int n ;
+int arr[1000001];
+int sorted[1000001];
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
+	return;
+}
+
+void merge(int* a, int start, int mid, int end) {
+	int ri = mid+1;//오른쪽배열의 첫번째(mid기준)
+	int le = start;//왼쪽 배열의 첫번째(mid기준)
+	int s = start;//정렬할 전체배열의 첫번째(왼쪽+오른쪽 정렬합칠거임)
+
+	while (le <= mid && ri <= end) {
+		if (a[ri] <= a[le]) {//작은거부터넣어주기
+			sorted[s] = a[ri];
+			ri++;
+		}
+		else {
+			sorted[s] = a[le];
+			le++;
+		}
+		s++;
+	}
+	//나머지 값도 넣어주기
+	if (le > mid) {
+		while (ri <= end) {
+			sorted[s] = a[ri];
+			s++;
+			ri++;
+		}
+	}
+	else {
+		while (le <= mid) {
+			sorted[s] = a[le];
+			s++;
+			le++;
+		}
+	}
+	for (int i = start; i <= end; i++) {
+		a[i] = sorted[i];
+	}
+}
+
+void mergesort(int *a,int start,int end) {
+	if (start < end) {//배열크기 1인건 안해도됨
+		int mid = (start + end) / 2; //중간값 기준으로 나눠서 또 병합정렬해줄거임
+		mergesort(a, start, mid);
+		mergesort(a, mid + 1, end);
+		//쪼갠거부터 정렬이 되야하기 때문에 재귀로
+		merge(a, start, mid, end);//정렬해주는 함수
+	}
+
+}
+int main() {
+	input();
+
+
+	mergesort(arr, 0, n - 1);//병합정렬함수
+
+	for (int i = 0; i < n; i++) {
+		cout << arr[i] << "\n";
+	}
+
+	
+	return 0;
+}
