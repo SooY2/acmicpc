@@ -1,0 +1,53 @@
+/*좌표 정렬하기 11650*/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int n;
+vector<pair<int,int>> v;
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		int a,b;
+		cin >> a >> b;
+		v.push_back({ a,b });
+	}
+	return;
+}
+
+bool compare(pair<int,int> a, pair<int,int> b) {//벡터 내의 값에 접근할 때
+	if (a.first < b.first) {
+		return true;
+	}
+	else if (a.first > b.first) {
+		return false;
+	}
+	else {
+		return a.second < b.second;
+	}
+}
+
+void slove() {
+	sort(v.begin(), v.end(), compare);
+	return;
+}
+void show() {
+	for (int i = 0; i < n; i++) {
+		cout << v[i].first << " " << v[i].second<<"\n";
+	}
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
