@@ -1,0 +1,67 @@
+/*2170 선긋기
+이어지는 선의 시작점과 끝점을 저장해 이어지지 않으면 끝-시작해서 길이 저장해주고
+새로운 시작점과 끝점 설정
+어떤 경우에 이어지지 않는지 생각하기*/
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n,ans,start,endd,l;
+typedef pair<int, int> line;
+line arr[1000001];
+
+
+void input() {
+	cin >> n;
+	for(int i=0;i<n;i++)
+	{
+		cin >> arr[i].first >> arr[i].second;
+	}
+	return;
+}
+
+
+void slove() {
+	sort(arr, arr + n);//first 오름차순 정렬
+
+	start = arr[0].first;//이어진 선의 시작점(최소)
+	endd = arr[0].second;//이어진 선의 끝점(최대)
+	
+	for (int i = 1; i <= n; i++) {
+
+		if (i == n) {
+			ans += (endd - start);
+		}
+		int s = arr[i].first;
+		int e = arr[i].second;
+
+		if(endd>=s){
+			if (endd <= e) {
+				endd = e;
+			}
+		}
+		else{//이어지지 않는 선
+			ans += (endd - start);
+			start = s;
+			endd = e;
+		}
+	}
+	return;
+}
+void show() {
+	cout << ans;
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
