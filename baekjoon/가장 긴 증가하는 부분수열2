@@ -1,0 +1,68 @@
+/*가장 긴 증가하는 부분 수열2*/
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int n,cnt;
+int v[1000001];
+vector<int> dp;
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> v[i];
+	}
+	return;
+}
+
+int mylower_bound(vector<int> &a,int x) {//dp에서 x가 들어갈 인덱스 반환(x보다 크거나같은 값 중 가장 작은값의 인덱스)
+	int st = 0;
+	int ed = a.size() - 1;
+	int mid;
+	while (st < ed) {
+		mid = (st + ed) / 2;
+		if (x > a[mid]) {//찾으려는 수가 mid보다 크면
+			st = mid + 1;
+		}
+		else {
+			ed = mid;
+		}
+	}
+	return ed;
+}
+
+void slove() {
+	cnt = 1;
+	dp.push_back(v[0]);
+	for (int i = 1; i < n; i++) {
+		if (dp.back() < v[i]) {
+			dp.push_back(v[i]);
+			cnt++;
+		}
+		else {
+			int idx = mylower_bound(dp, v[i]);
+			dp[idx] = v[i];
+		}
+
+	}
+
+	return;
+}
+
+void show() {
+	cout << cnt;
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
