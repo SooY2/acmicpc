@@ -1,0 +1,50 @@
+/*로프
+10 15 60 이 있으면
+10 15 60 20(로프 10,60 사용) 30(로프 15,60사용 or 10 15 60 모두 사용) 중 가장큰거
+
+로프 한개를 고른다면 중량이 큰 로프가 최대,
+두개를 고른다면 중량이 두번째로 큰 로프가 최대,
+...
+*/
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n,val,ans;
+int arr[100010];
+
+void input() {
+	cin >> n;
+	for (int i = 1; i <= n; i++) {
+		cin >> arr[i];
+	}
+
+	return;
+}
+
+void slove() {
+	sort(arr, arr + n+1);//오름차순정렬
+	for (int i = 1; i <= n; i++) {
+		int val = arr[n - i+1] * i;
+		if (ans < val) {
+			ans = val;
+		}
+	}
+	return;
+}
+void show() {
+	cout << ans;
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
