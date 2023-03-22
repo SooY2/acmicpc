@@ -1,0 +1,33 @@
+/*1427 소트인사이드*/
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+string str, ans;
+
+void input() {
+	cin >> str;
+	return;
+}
+
+void slove() {
+	sort(str.begin(), str.end(), greater<char>());
+	return;
+}
+void show() {
+	cout << str;
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
