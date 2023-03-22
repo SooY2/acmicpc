@@ -1,0 +1,65 @@
+/*6603 로또
+입력은 여러개의 한줄 테스트케이스, 첫번째 수는 K 이고 다음 K개수는 집한 S에 포함되는 수(오름차순으로 주어짐)
+S에서 순서 상관없이 6개 뽑는 경우 출력*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+void input() {
+
+	return;
+}
+
+void combination(vector<int> v, vector<int> ans, int st) {
+	if (ans.size() == 6) {
+		for (int i = 0; i < ans.size(); i++) {
+			cout << ans[i] << " ";
+		}
+		cout << "\n";
+		return;
+	}
+	else {
+		for (int i = st; i < v.size(); i++) {
+			ans.push_back(v[i]);
+			combination(v, ans, i + 1);
+			ans.pop_back();
+		}
+	}
+}
+
+void slove() {
+	int k;
+	while (true) {
+		cin >> k;
+		if (k == 0) break;
+		vector<int> v(k);
+		vector<int> ans;
+		for (int i = 0; i < k; i++) {
+			cin >> v[i];
+		}//입력받기
+
+		combination(v, ans, 0);
+		cout << "\n";
+
+
+	}
+
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
