@@ -1,0 +1,81 @@
+/*1759 암호 만들기
+*/
+#include <iostream>
+#include<algorithm>
+#include <vector>
+using namespace std;
+
+int n,m,vcnt,ccnt;
+vector<char> arr;
+vector<char> result;
+
+void input() {
+	cin >> n >> m;
+	for (int i = 0; i < m; i++) {
+		char ch;
+		cin >> ch;
+		arr.push_back(ch);
+	}
+
+
+	return;
+}
+
+int check_cnt(vector<char> arr,bool b) {
+	vcnt = 0;
+	ccnt = 0;
+	for (int i = 0; i < n; i++) {
+		if (arr[i] == 'a' || arr[i] == 'e' || arr[i] == 'i' || arr[i] == 'o' || arr[i] == 'u') {
+			vcnt++;
+		}
+		else ccnt++;
+	}
+	if (b == 0) return vcnt;
+	else return ccnt;
+}
+
+
+void com(int st) {
+	if (result.size() == n) {
+		if (check_cnt(result,0) == 0 || check_cnt(result,1) < 2) {
+			return;
+		}
+		else {
+			for (int i = 0; i < n; i++) {
+				cout << result[i];
+			}
+			cout << "\n";
+		}
+	}
+	else {
+		for (int i = st; i < m; i++) {
+			result.push_back(arr[i]);
+			com(i + 1);
+			result.pop_back();
+		}
+	}
+}
+
+void slove() {
+	sort(arr.begin(), arr.end());
+	com(0);//시작인덱스, 총 개수, 뽑을 개수
+
+	
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
