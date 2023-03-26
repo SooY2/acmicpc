@@ -1,0 +1,67 @@
+/*17609 회문
+맨 뒤랑 앞 부터 검사하면서 같으면 패스 다르면 둘 중 하나 다음거 같은지 확인해보기*/
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+
+void input() {
+
+	return;
+}
+
+int solution(string str, int st, int ed) {//하나 삭제하고 검사할 때
+
+	while (st < ed) {
+		if (str[st] == str[ed]) {
+			st++;
+			ed--;
+		}
+		else if (str[st] != str[ed]) {//회문이 아닌경우 나오면 2return 
+			return 2;
+		}
+	}
+	return 1;//회문이면 1 리턴
+}
+
+void slove() {
+	int t;
+	cin >> t;
+	while (t--) {
+		string str;
+		cin >> str;
+		int st = 0, ed = str.size() - 1;
+		int ch = 0;
+		while (st < ed) {
+			if (str[st] == str[ed]) {
+				st++;
+				ed--;
+			}
+			else if (str[st] != str[ed] && ch == 0) {
+				ch = min(solution(str, st, ed - 1), solution(str, st + 1, ed ));
+				break;
+
+			}
+		}
+
+		cout << ch << "\n";
+	}
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
