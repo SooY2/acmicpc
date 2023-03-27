@@ -1,0 +1,59 @@
+//1260 DFS와 BFS
+ 
+#include <iostream>
+#include <deque>
+using namespace std;
+
+int n, m, v;
+bool map[1010][1010];
+bool visited[1010];
+
+void DFS(int x) {
+	cout << x << " ";
+	visited[x] = 1;
+	
+	for (int i = 1; i <= n; i++) {
+		if (map[x][i] == 1 && visited[i] == 0) {
+			DFS(i);
+		}
+	}
+	return;
+}
+
+void BFS(int x) {
+	deque<int> q;
+	bool visit[1010] = { 0 };
+	q.push_back(x);
+	visit[x] = 1;
+	cout << x << " ";
+	while (!q.empty()) {
+		int pos = q.front();
+		q.pop_front();
+		for (int i = 1; i <= n; i++) {
+			if (map[pos][i] == 1 && visit[i] == 0) {
+				q.push_back(i);
+				cout << i << " ";
+				visit[i] = 1;
+			}
+		}
+	}
+	return;
+}
+
+
+int main() {
+
+	cin >> n >> m >> v;
+
+	while (m--) {
+		int a, b;
+		cin >> a >> b;
+		map[a][b] = 1;
+		map[b][a] = 1;
+	}//그래프 만들기
+
+	DFS(v);
+	cout << "\n";
+	BFS(v);
+	return 0;
+}
