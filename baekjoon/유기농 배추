@@ -1,0 +1,68 @@
+/*1012 유기농 배추
+map에서 상하좌우로 연결된개수*/
+#include <iostream>
+#include <deque>
+#include <cstring>
+using namespace std;
+
+bool map[51][51];
+int m, n, k;
+int movex[4] = { -1,1,0,0 };
+int movey[4] = { 0,0,-1,1 };
+
+bool isinside(int x, int y) {
+	if (x >= 0 && y >= 0 && x < m && y < n) return true;
+	else return false;
+}
+
+void BFS(int x, int y) {
+	deque<pair<int, int>> q;
+	q.push_back({ x,y });
+	map[x][y] = 0;
+
+	while (!q.empty()) {
+		int posx = q.front().first;
+		int posy = q.front().second;
+		q.pop_front();
+		
+		for (int i = 0; i < 4; i++) {
+			int nx = posx + movex[i];
+			int ny = posy + movey[i];
+
+			if (isinside(nx, ny) && map[nx][ny] == 1 ) {
+				q.push_back({ nx,ny });
+				map[nx][ny] = 0;
+			}
+		}
+
+	}
+	return;
+}
+
+int main() {
+	int t;
+	cin >> t;
+	while (t--) {
+		memset(map, 0, sizeof(map));
+		int cnt = 0;
+		cin >> m >> n >> k;
+
+		while (k--) {
+			int a, b;
+			cin >> a >> b;;
+			map[a][b] = 1;
+		}
+
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++) {
+				if (map[i][j] == 1 ) {
+					BFS(i, j);
+					cnt++;
+				}
+			}
+		}
+		cout << cnt << "\n";
+
+	}
+	return 0;
+}
