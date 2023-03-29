@@ -1,0 +1,62 @@
+/*11403 경로찾기
+
+방향 그래프에서 갈 수 있는지 찾기*/
+#include <iostream>
+#include<queue>
+#include <cstring>
+using namespace std;
+
+int n;
+bool map[101][101];
+bool visited[101];
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> map[i][j];
+		}
+	}
+	return;
+}
+
+int dfs(int x, int y) {
+
+
+		for (int i = 0; i < n; i++) {
+			if (map[x][i] == 1&&visited[i]==0) {
+				visited[i] = 1;
+				dfs(i, y);
+			}
+		}
+	
+		if (visited[y] == 1) return 1;
+		else return 0;
+}
+
+void slove() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			memset(visited,0,sizeof(visited));
+			cout<<dfs(i, j)<<" ";
+		}
+		cout << "\n";
+	}
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
