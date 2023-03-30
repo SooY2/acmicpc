@@ -1,0 +1,69 @@
+/*13549 숨바꼭질
+
+범위 주위
+*2일 때가 최소니까 제일 먼저 검사 해줘야함
+*/
+#include <iostream>
+#include<deque>
+using namespace std;
+
+int n, k;
+int arr[100001];
+bool visited[100001];
+bool ch;
+
+void input() {
+	cin >> n >> k;
+	return;
+}
+
+void dp(int n) {
+	deque<int> q;
+	q.push_back(n);
+	visited[n] = 1;
+	while (!q.empty()) {
+		int pos = q.front();
+		q.pop_front();
+		if (pos == k) return;
+		if (pos * 2 < 100001 && visited[pos * 2] == 0) {
+			arr[pos * 2] = arr[pos];
+			visited[pos * 2] = 1;
+			q.push_front(pos * 2);
+		}
+		if (pos-1>=0&&visited[pos - 1] == 0) {
+			arr[pos - 1] = arr[pos] + 1;
+			visited[pos - 1] = 1;
+			q.push_back(pos - 1);
+		}
+		if (pos+1<100001&&visited[pos + 1] == 0) {
+			arr[pos + 1] = arr[pos] + 1;
+			visited[pos + 1] = 1;
+			q.push_back(pos + 1);
+		}
+
+		
+	}
+	return;
+}
+
+void slove() {
+	dp(n);
+
+	return;
+}
+void show() {
+	cout << arr[k];
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
