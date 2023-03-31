@@ -1,0 +1,58 @@
+/*15649 n과 m(1)
+n.m이 주어졌을 때 n개중 중복없이 m개 골라서 출력, 순서 상관 있음*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n, m;
+vector<int> v;
+bool visited[10] = { 0 };
+
+void input() {
+	cin >> n >> m;
+	return;
+}
+
+void dfs() {
+
+	if (v.size() == m) {
+		for (int i = 0; i < v.size(); i++) {
+			cout << v[i] << " ";
+		}
+		cout << "\n";
+		return;
+	}
+	else {
+		for (int i = 1; i <= n; i++) {
+			if (visited[i] == 0) {
+				v.push_back(i);
+				visited[i] = 1;
+				dfs();
+				v.pop_back();
+				visited[i] = 0;
+			}
+			
+		}
+	}
+}
+
+void slove() {
+	dfs();
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
