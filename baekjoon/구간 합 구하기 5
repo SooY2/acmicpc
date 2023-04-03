@@ -1,0 +1,49 @@
+/*11660 구간 합 구하기 5*/
+
+#include <iostream>
+using namespace std;
+
+long arr[1025][1025];
+int n, m;
+
+void input() {
+	cin >> n >> m;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j <= n; j++) {
+			cin >> arr[i][j];
+			arr[i][j] += arr[i][j - 1];
+		}
+	}
+
+	return;
+}
+
+void slove() {
+	
+
+	while (m--) {
+		int ans = 0;
+		int x1, y1, x2, y2;
+		cin >> x1 >> y1 >> x2 >> y2;
+		for (int i = x1; i <= x2; i++) {
+			ans = ans + arr[i][y2] - arr[i][y1 - 1];
+		}
+		cout << ans<<"\n";
+	}
+
+	return;
+}
+void show() {
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
