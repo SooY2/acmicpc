@@ -1,0 +1,62 @@
+/*1806 부분합
+누적합 구해서 검사 계속 하기.. 되려나 ->시간초과!!
+
+투포인터
+st와 ed로 해서 원하는 결과보다 작으면 ed+, 원하는 결과면 st+
+이때길이 가장 작은게 답
+*/
+#include <iostream>
+using namespace std;
+
+long long n, s,ans=100010;
+int st, ed;
+long long arr[100001];
+
+void input() {
+	cin >> n>>s;
+	for (int i = 1; i <= n; i++) {
+		cin >> arr[i];
+		arr[i] += arr[i - 1];
+
+	}
+	return;
+}
+
+
+void slove() {
+	long long val=0;
+	st = 0;
+	ed = 1;
+	while (ed <= n) {// ed가 n보다 크면 안되므로 ed로 해야함,st로하면 ed인덱스 오류남
+		int l = ed - st;
+		val = arr[ed] - arr[st];
+		if (val >= s) {
+			st++;
+			if (l < ans) {
+				ans = l;
+
+			}
+		}
+		else ed++;
+		
+	}
+	return;
+}
+void show() {
+	if (ans == 100010) cout << 0;
+	else cout << ans;
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
