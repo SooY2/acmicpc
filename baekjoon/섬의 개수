@@ -1,0 +1,94 @@
+/*4963 섬의 개수
+
+한 정사각형의 주변에 있는 상하좌우,대각선에 있으면 하나의 섬으로 간주함
+BFS문제, 하나 검사해서 그 주변검사해서 개수세기,
+1이면 큐에 넣기, 한번 BFS돌 때마다 cnt++ 해주기
+*/
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <string.h>
+using namespace std;
+
+int w, h;
+int map[51][51];
+bool visited[51][51];
+int move_x[8] = { -1,0,1,-1,1,-1,0,1 };
+int move_y[8] = { -1,-1,-1,0,0,1,1,1 };
+
+
+void input() {
+
+	return;
+}
+
+bool isinside(int x, int y) {
+	if (x >= 0 && x < w && y >= 0 && y < h) return true;
+	else return false;
+}
+
+void BFS(int x, int y) {
+	queue<pair<int, int>> q;
+	q.push({ x,y });
+	map[x][y] = 0;
+	while (!q.empty()) {
+		int posx = q.front().first;
+		int posy = q.front().second;
+		q.pop();
+
+		for (int i = 0; i < 8; i++) {
+			int nx = posx + move_x[i];
+			int ny = posy + move_y[i];
+			if (isinside(nx, ny) && map[nx][ny] == 1) {
+				q.push({ nx,ny });
+				map[nx][ny] = 0;
+			}
+		}
+	}
+}
+
+void slove() {
+
+	while (true) {
+		cin >> w >> h;
+		int cnt = 0;
+		if (w == 0 && h == 0) {
+			return;
+		}
+		else {
+			for (int i = 0; i < h; i++) {
+				for (int j = 0; j < w; j++) {
+					cin >> map[j][i];
+				}
+			}//입력받기
+
+			for (int i = 0; i < h; i++) {
+				for (int j = 0; j < w; j++) {
+					if (map[j][i] == 1) {
+						BFS(j, i);
+						cnt++;
+					}
+				}
+			}
+			cout << cnt << "\n";
+		}
+	}
+
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
