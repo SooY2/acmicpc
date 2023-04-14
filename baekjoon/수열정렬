@@ -1,0 +1,55 @@
+/*1015 수열정렬
+
+벡터 첫번째 값만 정렬하는 거 이용해서 정렬 후 새로운배열에 넣기
+*/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int n;
+vector<pair<int,int>> v;
+
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		int val;
+		cin >> val;
+		v.push_back({val,i});
+	}
+	return;
+}
+
+
+void slove() {
+	sort(v.begin(), v.end());
+
+	vector<int> ans(n);
+	for (int i = 0; i < n; i++) {
+		ans[v[i].second] = i;
+	}
+
+	for (int i = 0; i < n; i++) {
+		cout << ans[i] << " ";
+	}
+
+	return;
+}
+void show() {
+	
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
