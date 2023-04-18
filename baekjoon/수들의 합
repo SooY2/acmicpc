@@ -1,0 +1,42 @@
+/*1789 수들의 합
+* 
+* s를 다른 수들로 최대한 많이 쪼개기
+1부터 더하다가 s넘으면 s랑 그 수 차이만큼의 값을 빼고 마지막값 추가하기
+-> 즉, s를 넘으면 그 수와 이미 더했던 수를 바꿔줄거기 때문에 넘는 순간의 개수가 답. 
+*/
+#include <iostream>
+using namespace std;
+
+long long n,s,ans;
+
+void input() {
+	cin >> s;
+	return;
+}
+
+void slove() {
+	n = 1;
+	while (ans <= s) {
+		ans += n;
+		n++;
+	}
+
+	cout << n-2;
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
