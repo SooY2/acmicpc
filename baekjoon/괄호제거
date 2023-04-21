@@ -1,0 +1,100 @@
+/*2800 괄호 제거
+
+1. 스택으로 괄호 찾기
+	1.스택으로 찾아서 vector에 쌍으로 저장
+2. 조합로 괄호 제거된 식 배열에 저장
+	1.vector의 first로 조합 만들기 
+	2.str에서 vector의 인덱스를 제외하고 저장
+3. 배열 정렬
+4. (((1)))(2) 이런경우 중복 생기기때문에 중복되는 경우 제거해주기
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <stack>
+using namespace std;
+
+string str;
+vector<pair<int, int>> v;
+vector<string> ans;
+
+void input() {
+	cin >> str;
+	return;
+}
+
+void checkParenthesis() {//괄호쌍 찾기
+	stack<int> stack;
+	for (int i = 0; i < str.size(); i++) {
+		if (str[i] == '(') {
+			stack.push(i);
+		}
+		else if (str[i] == ')') {
+			v.push_back({ stack.top(),i });
+			stack.pop();
+		}
+	}
+}
+
+vector<int> com;
+string tmp;
+bool strcom[210];
+void combi(int size,int st) {
+	tmp = "";
+	if (com.size() == size) {//종료시점
+		for (int i = 0; i < str.size(); i++) {
+			if (strcom[i] == 0 ) {
+				tmp += str[i];
+			}
+		}
+		ans.push_back(tmp);
+		return;
+	}
+	else {
+		for (int i = st; i < v.size(); i++) {
+			if (strcom[v[i].first] == 0) {
+				strcom[v[i].first] = 1;
+				strcom[v[i].second] = 1;
+				com.push_back(i);
+				combi(size, i + 1);
+				strcom[v[i].first] = 0;
+				strcom[v[i].second] = 0;
+				com.pop_back();
+			}
+		}
+	}
+}
+
+void slove() {
+	checkParenthesis();
+	
+	int n = v.size();
+	for (int i = 1; i <= n; i++) {
+		combi(i,0);
+	}
+	
+	sort(ans.begin(), ans.end());
+	ans.erase(unique(ans.begin(), ans.end()), ans.end());
+
+	return;
+}
+void show() {
+	for (int i = 0; i < ans.size(); i++) {
+		cout << ans[i] << "\n";
+	}
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
