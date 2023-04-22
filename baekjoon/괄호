@@ -1,0 +1,55 @@
+/*9012 괄호*/
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+string str;
+string checkVPS() {
+	stack<int> stack;
+	for (int i = 0; i < str.size(); i++) {
+		if (str[i] == '(') {
+			stack.push(i);
+		}
+		else if (str[i] == ')') {
+			if (stack.empty()) return "NO";
+			else {
+				stack.pop();
+			}
+		}
+	}
+	if (stack.empty()) return "YES";
+	else return "NO";
+}
+
+void input() {
+	int n;
+	cin >> n;
+	while (n--) {
+	
+		cin >> str;
+		cout << checkVPS() << "\n";
+	}
+	return;
+}
+
+void slove() {
+
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
