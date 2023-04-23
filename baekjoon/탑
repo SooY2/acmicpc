@@ -1,0 +1,47 @@
+**2493 탑**
+
+ - **문제**
+	 6 9 5 7 4 가 주어질 때 해당 원소의 왼쪽에 있는 원소들 중 가장 가까이에 있으면서 해당 원소보다 크거나 같은 것 찾는 문제
+
+- **풀이방법**
+	스택이용, 원소의 인덱스와 값을 세트로 스택에 넣어줄거임
+	1. 값을 받아서 스택의 top이 val보다 크거나 같을 때까지 또는 빌 때까지 pop해주기
+	1-1. 스택의 top이 val보다 크거나 같다면 ans배열에 top의 인덱스 넣기
+	1-2. 스택이 비었다면 ans배열에 0넣기
+	2. stack에 val 값 push해주기
+
+- **코드**
+
+> #include <iostream>
+> #include <deque>
+> #include <vector> using namespace std;
+> 
+> int n,val,cnt; deque<pair<int,int>> st; vector<int> ans;
+> 
+> 
+> void input() { 	cin >> n; 	cin >> val; 	ans.push_back(0);
+> 	st.push_front({ 1,val });
+> 
+> 	return; }
+> 
+> void slove() { 	for (int i = 2; i <= n; i++) { 		cnt = 0; 		cin >>
+> val; 		while (true) { 			if (st.empty()) {
+> 				ans.push_back(0);
+> 				break; 			} 			if (st.front().second < val) {//스택의 top이 val보다 작으면(신호를 못받는 탑이면)
+> 				st.pop_front();
+> 				cnt++; 			} else if (st.front().second >= val) {
+> 				ans.push_back(st.front().first);
+> 				break; 			} 		} 		st.push_front({ i,val });
+> 		 	}
+> 
+> 	return; } void show() { 	for (int i = 0; i < n; i++) { 		cout <<
+> ans[i] << " "; 	}
+> 
+> 	return; }
+> 
+> int main() { 	ios_base::sync_with_stdio(false); 	cin.tie(NULL);
+> 	cout.tie(NULL);
+> 
+> 	input(); 	slove(); 	show();
+> 
+> 	return 0; }
