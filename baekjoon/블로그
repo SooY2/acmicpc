@@ -1,0 +1,60 @@
+/*21921 블로그*/
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int n, x, cnt = 0;
+
+
+void input() {
+
+	cin >> n >> x;
+	vector<int> v(n+1);
+	vector<int> ans(n+1);
+
+
+	for (int i = 1; i <= n; i++) {
+		cin >> v[i];
+		v[i] += v[i - 1];
+		if (i >= x) {
+			ans[i] = v[i] - v[i - x];
+		}
+	}
+
+	sort(ans.rbegin(), ans.rend());
+	int val=ans[0];
+	if (ans[0] == 0) {
+		cout << "SAD";
+		return;
+	}
+	else {
+		for (int i = 0; i <= n; i++) {
+			if (ans[i] != val) break;
+			cnt++;
+		}
+	}
+	cout << val<<"\n"<<cnt;
+	return;
+}
+
+void slove() {
+
+	return;
+}
+void show() {
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
