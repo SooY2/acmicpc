@@ -1,0 +1,56 @@
+/*1932 정수삼각형*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+vector<long long> v[501];
+int n;
+long long val;
+
+void input() {
+	cin >> n;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 0; j < i; j++) {
+			cin >> val;
+			v[i].push_back(val);
+		}
+	}
+	return;
+}
+
+void slove() {
+	for (int i = 2; i <= n; i++) {
+		for (int j = 0; j < i; j++) {
+			if (j == 0) {
+				v[i][j] += v[i - 1][0];
+			}
+			else if (j == i - 1) {
+				v[i][j] += v[i - 1][j - 1];
+			}
+			else {
+				v[i][j] += max(v[i - 1][j - 1], v[i - 1][j]);
+			}
+		}
+	}
+	return;
+}
+void show() {
+
+	long long ans = *max_element(v[n].begin(), v[n].end());
+	cout << ans;
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
