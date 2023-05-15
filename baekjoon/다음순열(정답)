@@ -1,0 +1,56 @@
+/*
+다음 순열
+
+뒤에서부터 증가하는 인덱스의 마지막 (idx) 찾고 idx~n중에 idx-1값보다 큰거 찾아서 갑 바꾸기, idx부터 뒤에값 오름차순 정렬하기
+idx	0 1 2 3 4
+	1 2 5 4 3
+idx = 2(5)
+idx-1 = 1(2)
+*/
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+
+
+
+int main() {
+	int n;
+	cin >> n;
+	vector<int> v(n);
+	for(int i=0;i<n;i++){
+		cin >> v[i];
+	}
+
+	int idx = n-1;
+	int pre;
+	while (idx>0) {	
+		pre = idx - 1;
+		if (v[idx] > v[pre]) {
+			for (int i = n - 1; i >= idx; i--) {
+				if (v[pre] < v[i]) {//pre보다 큰거 찾으면
+					int tmp = v[pre];
+					v[pre] = v[i];
+					v[i] = tmp;
+					break;
+				}
+			}
+			sort(v.begin() + idx, v.end());
+			for (int i = 0; i < n; i++) {
+				cout << v[i] << " ";
+			}
+			return 0;
+		}
+		else {
+			idx--;
+		}
+	}
+
+	cout << -1;
+
+
+
+	return 0;
+}
