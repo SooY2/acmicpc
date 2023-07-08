@@ -1,0 +1,42 @@
+/*수들의 합 5*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int n;
+int cnt=0;
+int hap;
+
+void input() {
+	cin >> n;
+	return;
+}
+
+void slove() {
+	for (int i = 1; i <= n; i++) {
+		hap = 0;
+		int tmp = i;
+		while (hap < n) {
+			hap += tmp;
+			tmp++;
+		}
+		if (hap == n) cnt++;
+	}
+	return;
+}
+void show() {
+	cout << cnt;
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
