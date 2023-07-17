@@ -1,0 +1,87 @@
+/*12891 dna비밀번호
+
+A:17 C:19 G:23 T:36
+
+2차원벡터 dp로
+*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int s, p,cnt,result;
+char str;
+
+int DNA[2][5];
+vector<vector <int>> v(10, vector<int>(1000001, 0));
+
+void input() {
+	cin >> s >> p;
+	for (int i = 1; i <= s; i++) {
+		cin >> str;
+		switch (str-'0')
+		{
+		case 17:
+			v[1][i]++;
+			break;
+		case 19:
+			v[2][i]++;
+			break;
+		case 23:
+			v[3][i]++;
+			break;
+		case 36:
+			v[4][i]++;
+			break;
+		}
+		for (int j = 1; j <= 4; j++) {
+			v[j][i] += v[j][i - 1];
+		}
+	}
+	for (int i = 1; i <= 4; i++) {
+		cin >> DNA[0][i];
+	}
+	return;
+}
+
+void slove() {
+	for (int i = p; i <= s; i++) {
+		cnt = 0;
+		for (int j = 1; j <= 4; j++) {
+			DNA[1][j] = v[j][i] - v[j][i - p];
+			if (DNA[0][j] <= DNA[1][j]) {
+				cnt++;
+			}
+		}
+		if(cnt==4) result++;
+	}
+
+
+
+	return;
+}
+void show() {
+	/*cout << "    A C G T" << "\n";
+	for (int i = 1; i <= s; i++) {
+		cout << i << " : ";
+		for (int j = 1; j <= 4; j++) {
+			cout << v[j][i] << " ";
+		}
+		cout << "\n";
+	}*/
+
+	cout << result;
+
+	return;
+}
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	input();
+	slove();
+	show();
+
+	return 0;
+}
